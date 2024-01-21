@@ -119,6 +119,24 @@ inside the newly created file:
 <a id="what-are-templates"></a>
 ## What are templates?
 
+1. templates are structured files written using Django templating language (DTL) and allow different webpages to share the same structure, but with customizable content
+2. configure templates in your app:
+  1. travel to you app folder, create a "templates" folder and within that create a folder called "app_name" - to avoid namespace issues 
+  2. within the last created folder, create a home.html template file and add basic markup
+    1. in the views.py file, call the render function within the view function for the homepage - render(request, 'crm/index.html'), now the template is rendered when user hits that route
+
+3. template inheritance allows you to define components in a parent template that children template can use, without redefining it themselves
+4. elements are components of a template which can be *reused* - such as button, or a header 
+5. template inheritance can be setup with the following steps
+  1. create a base template in templates/app_name - ie base.html
+  2. define a unique space for this template with {% block content %} custom data here {% endblock %} - everything outside this block will be inherited by child templates
+  3. link this parent template by going to any other template and doing the following 
+    - add this line at the very top of the template {% extends "crm/base.html" %} 
+    - wrap the content you want to display on a child template with the {% block content %} custom data here {% endblock %} operator
+
+
+<a id="dtl"></a>
+## Django Templating Language
 
 <a id="credits"></a>
 # Credits

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def home(request):
-    return HttpResponse("Home page")
+    return render(request, 'crm/index.html')
 
 def register(request):
-    return HttpResponse("Registration page")
+    return render(request, 'crm/register.html')

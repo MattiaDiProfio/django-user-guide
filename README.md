@@ -138,6 +138,22 @@ inside the newly created file:
 <a id="dtl"></a>
 ## Django Templating Language
 
+1. it is a mini language to write logic within our templates and render data through your templates using data passed to the template via the views in views.py for example
+2. you can pass data to your template by 
+  1. passing a dictionary as the 3rd parameter of the render function for the template you are trying to populate 
+  2. within the template, declare {{ key_name }} anywhere you wanna display the data associated with the key_name key in the dictionary you passed to the template 
+3. you can enforce conditional rendering with the following syntax 
+  1. {% if condition %}
+            content A
+        {% else %}
+            content B
+        {% endif %}
+      - use this python like syntax to enfornce conditional rendering
+4. similarly, you can loop over data using a for-loop like syntax
+  - {% for n in list_to_iterate %}
+            <p>{{ n }}</p>
+        {% endfor %}
+
 <a id="credits"></a>
 # Credits
 [back to top](#table-of-contents)

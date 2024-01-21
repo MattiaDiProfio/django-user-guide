@@ -13,6 +13,9 @@
   - [Structure of an app](#structure-of-django-app)
 - [View and Templates](#views-templates)
   - [What are views?](#what-are-views)
+    - [Setup basic webpage](#setup-webpage)
+  - [What are templates?](#what-are-templates)
+
 - [Credits](#credits)
 
 This documents serves as a personal guide to help developers gain confidence using the Django framework.
@@ -50,11 +53,11 @@ constricted to this virtual environment  - use "\" and not "/", if this works yo
 1. db.sqlite3 - a default sqlite database plugged into our app, good for dev but not for deployment
 2. manage.py - used to run admin tasks, control centre for the app, used for migrations etc.
 3. inside the project folder
-    1. __init__.py - enforces the directory as a module
-    2. asgi.py - used for async development/actions
-    3. settings.py - django config file for our project
-    4. urls.py - store all the routes configured on our app (/home, /login, /dashboard etc.)
-    5. wsgi.py - forwarding requests from web servers to a python web framework
+  1. __init__.py - enforces the directory as a module
+  2. asgi.py - used for async development/actions
+  3. settings.py - django config file for our project
+  4. urls.py - store all the routes configured on our app (/home, /login, /dashboard etc.)
+  5. wsgi.py - forwarding requests from web servers to a python web framework
 
 <a id="django-apps"></a>
 # Django apps
@@ -94,14 +97,28 @@ constricted to this virtual environment  - use "\" and not "/", if this works yo
 - views are python functions or classes used to respond to a particular request
 
 <a id="setup-webpage"></a>
-## Setup a starting webpage 
+### Setup a starting webpage 
 
 steps to be taken are
+0. define a urls.py file in the crm folder/project folder
+inside the newly created file:
 1. import path from django.urls and HttpResponse from django.http 
-2. define a view via the function with name of "route" such as register(request) which returns an HttpResponse message 
+2. inside the views.py file : define a view via the function with name of "route" such as register(request) which returns an HttpResponse message in the urls.py file
 3. create a urlpatterns list to encapsulate all urls used in the application
-- enter path(routename, view to be returned)
+- enter path(routename, view to be returned) in urls.py file
 - i.e. urlpatterns = [path('route_name', 'view_name' - same name of function defined in step 2)]
+4. import the include django.urls "include" function to link the app's urls.py to the projects urls.py
+5. within the urlspatterns list, add a path with empty route and view as include('projectname.urls')
+6. setup app's views and urls files 
+  1. in urls.py from . import views
+  2. add the following path to urlpatterns list - path('register', views.register), 
+7. configure the default page for our app
+  1. in urls.py, define an empty path('', views.home_view)
+  2. in views.py define a function/view for the home page
+
+<a id="what-are-templates"></a>
+## What are templates?
+
 
 <a id="credits"></a>
 # Credits

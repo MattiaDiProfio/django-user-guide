@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Task
 
 def home(request):
 
@@ -12,6 +13,16 @@ def home(request):
 
     # pass context via the render function
     return render(request, 'crm/index.html', context)
+
+def task(request):
+
+    # perform a DB query 
+    query_data_all = Task.objects.all()
+    context = {
+        'allTasks' : query_data_all
+    }
+
+    return render(request, 'crm/task.html', context)
 
 def register(request):
     return render(request, 'crm/register.html')

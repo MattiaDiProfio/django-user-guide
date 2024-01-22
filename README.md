@@ -226,11 +226,20 @@ After you declared your Django model, we got to register it on our Django app us
 
 Now we have a look at how we can link multiple models using the concept of foreign keys.
 
-1. 
+1. Open the *models.py* and create a second model which you will link to an existing one.
+2. Write the following line as an attribute to the newly created model `model_linked_name = modelsForeignKey(model_linked_name, on_delete=models.CASCADE)` - models.CASCADE ensures that all connections to a model are deleted once that particular instance is deleted.
+3. Migrate and register this model as done with the previous one
 
 <a id="db-queries"></a>
 
 ### Performing database queries
+
+- ORM (Object relational mapping) is used to perform Django database queries. Follow the steps below to run a simple query to the Django SQLite database.
+
+1. In the *views.py* file, run the following line `from .models import Model_name`
+2. Inside the function/view you want to execute the query in, run the following line `query_data_all = Model_name.objects.all()` - this example fetches all the instances of the Model_name class
+3. Pass the query results to your template via a context dictionary and render it onto your view.
+4. **NOTE** - please google to find the appropriate query method to complete your task.
 
 <a id="credits"></a>
 # Credits

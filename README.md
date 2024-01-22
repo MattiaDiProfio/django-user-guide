@@ -17,7 +17,10 @@
     - [Setup basic webpage](#setup-webpage)
   - [What are templates?](#what-are-templates)
   - [Django Templating Language](#django-templating-language)
-
+- [Integrate a database](#integrate-database)
+  - [Django Admin Panel](#django-admin-panel)
+  - [Django models](#django-models)
+  - [Perform database queries](#db-queries)
 - [Credits](#credits)
 
 This document serves as a personal guide to help developers understand the basics of working with the Django framework.
@@ -185,6 +188,49 @@ Template inheritance can be setup with the following steps
 2. Within the template, declare `{{ key_name }}` anywhere you wanna display the data associated with the *key_name* key in the dictionary you passed to the template
 3. You can enforce conditional rendering with the following syntax `{% if condition %} content A {% else %} content B {% endif %}`
 4. Similarly, you can loop over data using a for-loop like syntax `{% for n in list_to_iterate %} <p> {{ n }} </p> {% endfor %}`
+
+<a id="integrate-database"></a>
+
+## Integrating a Database
+
+- Django apps come with a built-in SQLite relational database. Throughout this section, we will go through the steps to carry out CRUD operations on this database.
+
+<a id="django-admin-panel"></a>
+
+### Django admin panel
+
+- The Django Admin Panel can be accessed by running your server and visiting the /admin route. The DAP allows you to manage the underlying SQLite database that comes with your app. To access the DAP, you will need login credentials, which can be accessed with the following steps:
+
+1. Run the command `python manage.py createsuperuser`
+2. Fill in the prompts as you go along, careful to type matching passwords as they won't be displayed on screen.
+3. Re-start your server and login.
+
+<a id="django-models"></a>
+
+### Django models
+
+- Django models are a feature used by Django to create tables along with their fields. Think of these as classes which represent database tables.
+
+To create a model in Django, use the following steps:
+
+1. Head over to *models.py* and declare a model with the following syntax `class Name(models.Model): your_fields` - make sure to consult the different datatypes allowed by Django [here](#https://www.freecodecamp.org/news/common-django-model-fields-and-their-use-cases/)
+2. Migrate your created model by running the command `python manage.py makemigrations` in your cmd
+3. Push the model to your database by running the command `python manage.py migrate`
+
+After you declared your Django model, we got to register it on our Django app using the DAP. Follow these steps.
+
+1. Open the *admin.py* file
+2. Run the line `from .models import Name`
+3. Run the line `admin.site.register(Name)` to register the model on the DAP
+4. Login into the DAP, and you should see the Model registered as Name(s)
+
+Now we have a look at how we can link multiple models using the concept of foreign keys.
+
+1. 
+
+<a id="db-queries"></a>
+
+### Performing database queries
 
 <a id="credits"></a>
 # Credits

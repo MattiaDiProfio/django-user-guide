@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Task
+from .forms import TaskForm
 
 def home(request):
 
@@ -26,3 +27,13 @@ def task(request):
 
 def register(request):
     return render(request, 'crm/register.html')
+
+
+def task_form(request):
+    
+    form = TaskForm()
+
+    # create a context dictionary
+    context = { 'form' : form }
+
+    return render(request, 'crm/task-form.html', context)

@@ -21,6 +21,8 @@
   - [Django Admin Panel](#django-admin-panel)
   - [Django models](#django-models)
   - [Perform database queries](#db-queries)
+- [Model forms and CRUD operations](#model-forms-crud)
+  - [Create a model form](#create-model-form)
 - [Credits](#credits)
 
 This document serves as a personal guide to help developers understand the basics of working with the Django framework.
@@ -240,6 +242,36 @@ Now we have a look at how we can link multiple models using the concept of forei
 2. Inside the function/view you want to execute the query in, run the following line `query_data_all = Model_name.objects.all()` - this example fetches all the instances of the Model_name class
 3. Pass the query results to your template via a context dictionary and render it onto your view.
 4. **NOTE** - please google to find the appropriate query method to complete your task.
+
+<a id="model-forms-crud"></a>
+
+## Model Forms and CRUDS
+
+[back to top](#table-of-contents)
+
+- A Model Form is a class used to convert a Django model into a Django form. This form can then be rendered on the front-end to collect user input.
+
+<a id="create-model-form"></a>
+
+### Create a Model Form
+- To create a Model Form follow these steps: 
+
+1. Inside your app forlder, create the *forms.py* file.
+2. Run the line `from django.forms import ModelForm`, this class is the 'parent' class which every form you create will inherit from.
+3. Run the line `from .models import <model>` - model comes from models.py
+4. Define the model form class with the following syntax `class <model>Form(ModelForm): class Meta: model = <model> fields = '__all__'` - the Meta class allows us to specify which model and which model attributes the Form will model.
+5. Define a template for the form we just defined :
+
+- Inside *templates/<app_name>* create a .html file and populate it accordingly
+- Inside the *views.py* file, we must setup the View to be rendered (see above for a refresher) and then connect this View inside the *urls.py* file.
+
+6. Now we must create the View to be rendered:
+
+- Run the line `from .forms import <model>Form` inside the *views.py* file
+- Inside the last View function you defined, instantiate the class you just imported
+- create a context dictionary `{ "form" : instance_created }` and return `render(...)` as done with other views.
+- Finally, go to the last .html file you created and populate it to display the form model you passed in as a context dictionary. Here is an example below :
+`<form method="POST" autocomplete="off" enctype="multipart/form-data" {% csrf_token %} {{ form.as_p }} <input type="submit" value="Submit"> </form>` - as_p helps with formatting and labels of attribute names
 
 <a id="credits"></a>
 # Credits

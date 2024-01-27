@@ -1,0 +1,23 @@
+{% extends "crm/base.html" %} 
+
+    {% block content %}
+        <h1>Update Task</h1>
+        <p>Use the form below to update your task</p>
+
+        <hr>
+
+        <!-- add the form structure to render the TaskForm model -->
+        <form method="POST" autocomplete="off" enctype="multipart/form-data"
+
+            <!-- security token when submitting data via form -->
+
+            {% csrf_token %}
+
+            <!-- render the context dictionary -->
+            {{ updateTask.as_p }}
+
+            <input type="submit" value="Update">
+
+        </form>
+
+    {% endblock %}

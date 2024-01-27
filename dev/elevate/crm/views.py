@@ -39,3 +39,27 @@ def create_task(request):
     context = { 'form' : form }
 
     return render(request, 'crm/create-task.html', context)
+
+def update_task(request, pk):
+
+    # fetch a specific object by pk
+    task = Task.objects.get(id=pk)
+
+    # pre-populate the form with task attributes when rendered
+    form = TaskForm(instance=task)
+
+    if request.method == "POST":
+
+        form = TaskForm(request.POST, instance=task)
+
+        if form.is_valid():
+
+            form.save()
+
+            return redirect('all-tasks')
+
+    context = { 'updateTask' : form }
+    return render(request, 'crm/update-task.html', context)
+    
+
+

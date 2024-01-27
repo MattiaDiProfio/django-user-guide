@@ -296,7 +296,28 @@ Now we have a look at how we can link multiple models using the concept of forei
 
 2. **R - READ**
 
+- To read a model instance from the database using an instance id for example, follow the steps outlined below.
+- If you would like to get all instances from the database, use the `.all()` method to query, otherwise use the `.get(id=...)` method to fetch an object based on its creation id.
+
 3. **U - UPDATE**
+
+- To update an existing model instance, follow the steps outlined below.
+
+1. create a new View called `update-<model>.html` and populate it with the `base.html` components and a title to distinguish it.
+2. Set up your view in `views.py` and add the url to urlpatterns in `urls.py`.
+
+- Note that to make a url **dynamic** we use the following format `path('url/<str:pk>',...),`
+- Similarly, the view you just declared takes in *request* and *pk* as parameters.
+- Inside the view you defined, follow a similar process to the one in the **CREATE** section above:
+
+  1. fetch the object from the database based on pk input - `obj = <Model>.objects.get(id=pk)`
+  2. define a form object `form = <Model>Form(instance=obj)`
+  3. check if the method is POST, if it is `form = <Model>Form(request.post, instance=task)`
+  4. check if the form data is valid, if it is then save and redirect.
+  5. Inline with the POST if statement, define a context dictionary with the form defined and return `render(request, view_name, context)`
+
+- In order to allow users to access the edit page of a particular object, we can use a link tag on the frontend which directs the user to the page for that specific object, for example `<a href = "{% url 'update-task' task.id %}"> Update task </a>` is displayed on the `all-tasks.html` page using a for loop.
+- Finally, update the data loaded in the field and it should update it.
 
 4. **D - DELETE**
 

@@ -1,6 +1,9 @@
 from django.forms import ModelForm
 from .models import Task
 
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
 # create a form model based on the Task model found in models.py
 # this model form allows users to add a new task using a form
 class TaskForm(ModelForm):
@@ -11,4 +14,10 @@ class TaskForm(ModelForm):
         # specify attributes of Task model we want to utilise 
         fields = '__all__' # utilise all APPLICABLE attributes 
 
-    
+# create django class to define new app user
+class CreateUserForm(UserCreationForm):
+
+    class Meta:
+        model = User
+        # cherry-pick the user attributes we want to define
+        fields = ['username', 'email', 'password1', 'password2']

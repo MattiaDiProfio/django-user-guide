@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Task
-from .forms import TaskForm
+from .forms import TaskForm, CreateUserForm
 
 def home(request):
 
@@ -16,8 +16,22 @@ def all_tasks(request):
     return render(request, 'crm/all-tasks.html', context)
 
 def register(request):
-    return render(request, 'crm/register.html')
 
+    form = CreateUserForm()
+
+    if request.method == "POST":
+
+        # send request payload to database
+        form = CreateUserForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            
+            return HttpResponse('Registration successfull')
+
+    context = { 'RegistrationForm' : form }
+
+    return render(request, 'crm/register.html', context)
 
 def create_task(request):
     

@@ -25,6 +25,9 @@
   - [Create a model form](#create-model-form)
   - [Add CRUD functionalities](#crud-operations)
 - [Configure static files](#static-files)
+- [User authentication and authorization](#user-auth)
+  - [Create new app user](#create-a-new-user)
+  - [Configure user auth](#user-authentication)
 - [Credits](#credits)
 
 This document serves as a personal guide to help developers understand the basics of working with the Django framework.
@@ -345,6 +348,31 @@ Now we have a look at how we can link multiple models using the concept of forei
 6. To connect your css static files, define a `head` tag in your `base.html` and within that, the following tag `<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">`
 7. Similarly, create an `app.js` file in static/js and use a `script` tag to connect the static javascript files `<script src="{% static 'js/app.js' %}"></script>`
 
+<a id="static-files"></a>
+
+## User Authentication & Authorization
+
+- User Authentication is concerned with ensuring that login/signup procedures work as intended for registering and returning app users. User Authrorization is concered with what a logged in user can and cannot do on the application. To setup user auth in your app, follow the steps below.
+
+<a id="create-a-new-user"></a>
+
+### Create a new user
+
+1. Inside *forms.py* import the following `from django.contrib.auth.forms import UserCreationForm`, followed by the default User model import `from django.contrib.auth.models import User`
+2. Define a new class `CreateUserForm(UserCreationForm):` and within this class define the `Meta` class, where you can cherrypick the fields which will make up the User objects.
+3. Inside the *views.py* file, import the class you just defined, then within the `register` view
+  
+  - Create a `form` variable to instantiate the class imported.
+  - Check if the form method is POST and the form data is valid, in which case save the form and return an HttpResponse with a suitable message.
+  - Create the context dictionary `context = { 'RegistrationForm' : form }` and pass it to the `render(...)` method.
+  - Inside the `register.html` template, define the basic form syntax to send POST requests in django
+  - Within the form, under the csrf token, type `{{ RegistrationForm.as_p }}` to display the registration form.
+
+<a id="user-authentication"></a>
+
+### User authentication
+
+[back to top](#user-auth)
 
 # Credits
 

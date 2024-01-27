@@ -1,4 +1,10 @@
+<!-- link static css files -->
+{% load static %}
 <html>  
+
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    </head>
     <h1>Website Under Development</h1>
     <hr>
 
@@ -17,4 +23,7 @@
     {% block content %}
 
     {% endblock %}
+
+    <script src="{% static 'js/app.js' %}"></script>
+
 </html>

@@ -24,6 +24,7 @@
 - [Model forms and CRUD operations](#model-forms-crud)
   - [Create a model form](#create-model-form)
   - [Add CRUD functionalities](#crud-operations)
+- [Configure static files](#static-files)
 - [Credits](#credits)
 
 This document serves as a personal guide to help developers understand the basics of working with the Django framework.
@@ -244,7 +245,7 @@ Now we have a look at how we can link multiple models using the concept of forei
 1. In the *views.py* file, run the following line `from .models import Model_name`
 2. Inside the function/view you want to execute the query in, run the following line `query_data_all = Model_name.objects.all()` - this example fetches all the instances of the Model_name class
 3. Pass the query results to your template via a context dictionary and render it onto your view.
-4. **NOTE** - please google to find the appropriate query method to complete your task.
+4. __NOTE__ - please google to find the appropriate query method to complete your task.
 
 <a id="model-forms-crud"></a>
 
@@ -257,7 +258,8 @@ Now we have a look at how we can link multiple models using the concept of forei
 <a id="create-model-form"></a>
 
 ### Create a Model Form
-- To create a Model Form follow these steps: 
+
+- To create a Model Form follow these steps:
 
 1. Inside your app forlder, create the *forms.py* file.
 2. Run the line `from django.forms import ModelForm`, this class is the 'parent' class which every form you create will inherit from.
@@ -306,9 +308,9 @@ Now we have a look at how we can link multiple models using the concept of forei
 1. create a new View called `update-<model>.html` and populate it with the `base.html` components and a title to distinguish it.
 2. Set up your view in `views.py` and add the url to urlpatterns in `urls.py`.
 
-- Note that to make a url **dynamic** we use the following format `path('url/<str:pk>',...),`
+- Note that to make a url __dynamic__ we use the following format `path('url/<str:pk>',...),`
 - Similarly, the view you just declared takes in *request* and *pk* as parameters.
-- Inside the view you defined, follow a similar process to the one in the **CREATE** section above:
+- Inside the view you defined, follow a similar process to the one in the __CREATE__ section above:
 
   1. fetch the object from the database based on pk input - `obj = <Model>.objects.get(id=pk)`
   2. define a form object `form = <Model>Form(instance=obj)`
@@ -326,8 +328,26 @@ Now we have a look at how we can link multiple models using the concept of forei
 - to delete the task given the `pk` id, simply check if the form method is POST and then fetch the object with `<Model>.objects.get(id=pk)` and then delete it with `<obj>.delete()`.
 - redirect the user after operation
 
-<a id="credits"></a>
+<a id="static-files"></a>
+
+## Static files
+
+[back to top](#table-of-contents)
+
+- Static files such as css and JS files remain unchanged during a website's operation. They are directly sent to the user's web browser without being modified.
+- To configure any static file, follow the process below.
+
+1. create a `static` folder in the project root directory
+2. in your app's *settings.py* files, type the following after the STATIC_URL variable - `STATICFILES_DIRS = [ BASE_DIR / 'static' ]` to let django know where to find our static files.
+3. create `css` and `js` subfolders in the `static` folder, to house our static css and Javascript files.
+4. create a `style.css` file in the css folder, and write some code for testing purposes.
+5. to connect your static files to the frontend, write `{% load static %}` at the very top of your app's `base.html` file.
+6. To connect your css static files, define a `head` tag in your `base.html` and within that, the following tag `<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">`
+7. Similarly, create an `app.js` file in static/js and use a `script` tag to connect the static javascript files `<script src="{% static 'js/app.js' %}"></script>`
+
+
 # Credits
+
 [back to top](#table-of-contents)
 
 The material for this document has been gathered while studying the course *Python Django - Ultimate beginners course* on Udemy, authored by Arno Pretorius.

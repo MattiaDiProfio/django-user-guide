@@ -374,6 +374,45 @@ Now we have a look at how we can link multiple models using the concept of forei
 
 [back to top](#user-auth)
 
+- To setup user authentication, follow the steps below. We assume you have completed all the above steps up to this point.
+
+1. Create a *login.html* and a *dashboard.html* file in the templates/crm folder
+2. Populate the *login.html* template with the same contents as *register.html* and remove all unrelated code, then populate the *dashboard.html* page with basic text
+3. Next, we configure the *views.py* and *urls.py* files in the same way done before.
+4. In the *forms.py* file, import `AuthenticationForm` from `django.contrib.auth.forms` and `from django import forms` and `from django.forms.widgets import PasswordInput, TextInput`
+5. Still in *forms.py*, create a LoginForm class which inherits the `AuthenticationForm` class, as set the its attributes as follows :
+
+- `username = forms.CharField(widget=TextInput())`
+- `password = forms.CharField(widget=PasswordInput())`
+
+6. Inside *views.py* import the LoginForm model class just declared and instantiate it within the login view declared before. 
+
+- check for the POST method and if that's the case assign `form = LoginForm(request.POST, data=request.POST)`.
+- run the following at the top of *views.py* - `from django.contrib.auth.models import auth` and `from django.contrib.auth import authenticate, login, logout`
+- Now we check if the form input matches a record in the data, and either login the user or prompt them to try again. An example of the full login view/function is provided.
+`
+def login(request):
+  form = LoginForm()
+  if request.method == "POST":
+    form = LoginForm(request.POST, data=request.POST)
+    if form.is_valid():
+      username = request.POST.get('username')
+      password = request.POST.get('password')
+        user = authenticate(
+          request,
+          username=username,
+          password=password
+        )
+        if user is not None:
+          auth.login(request, user)
+          return redirect('dashboard')
+  context = { 'LoginForm' : form }
+  return render(request, 'crm/login.html', context)
+`
+
+7. Finally, we populate the *login.html* file with `{{ LoginForm.as_p }}` and add a login url in the *base.html* file.
+8. Modify the register view so that the user is redirected to the login url when they register a new account
+
 # Credits
 
 [back to top](#table-of-contents)

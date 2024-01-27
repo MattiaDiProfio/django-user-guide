@@ -14,4 +14,8 @@ urlpatterns = [
     path('update-task/<str:pk>', views.update_task, name="update-task"),
 
     path('delete-task/<str:pk>', views.delete_task, name="delete-task"),
+
+    path('login', views.login, name="login"),
+
+    path('dashboard', views.dashboard, name="dashboard"),
 ]

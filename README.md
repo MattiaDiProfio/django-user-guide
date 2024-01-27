@@ -372,7 +372,7 @@ Now we have a look at how we can link multiple models using the concept of forei
 
 ### User authentication
 
-[back to top](#user-auth)
+[back to top](#table-of-contents)
 
 - To setup user authentication, follow the steps below. We assume you have completed all the above steps up to this point.
 

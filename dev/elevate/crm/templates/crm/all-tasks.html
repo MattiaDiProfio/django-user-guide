@@ -24,6 +24,9 @@
 
             <!-- link to the update page for this task -->
             <a href = "{% url 'update-task' task.id %}"> Update task </a>
+            <!-- link to the delete page for this task -->
+            &nbsp;
+            <a href = "{% url 'delete-task' task.id %}"> Delete task </a>
 
             <br>
         {% endfor %}

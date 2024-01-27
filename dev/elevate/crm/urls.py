@@ -12,4 +12,6 @@ urlpatterns = [
 
     # dynamic url which renders the page based on the task id passed
     path('update-task/<str:pk>', views.update_task, name="update-task"),
+
+    path('delete-task/<str:pk>', views.delete_task, name="delete-task"),
 ]

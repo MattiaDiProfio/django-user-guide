@@ -1,0 +1,19 @@
+{% extends "crm/base.html" %} 
+
+    {% block content %}
+        <h1>Delete Task</h1>
+
+        <hr>
+
+        <!-- add the form structure to render the TaskForm model -->
+        <form method="POST" autocomplete="off" enctype="multipart/form-data"
+
+            <!-- security token when submitting data via form -->
+
+            {% csrf_token %}
+
+            <input type="submit" value="Delete">
+
+        </form>
+
+    {% endblock %}

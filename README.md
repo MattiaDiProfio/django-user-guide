@@ -321,6 +321,11 @@ Now we have a look at how we can link multiple models using the concept of forei
 
 4. **D - DELETE**
 
+- create a template called `delete-<model>.html`, then add connect `base.html` and add the following form inside `<form method="POST" autocomplete="off" enctype="multipart/form-data" {% csrf_token %} <input type="submit" value="Delete"> </form>`
+- set up functionality in *views.py* with a dynamic-url view and connect it to *urls.py*
+- to delete the task given the `pk` id, simply check if the form method is POST and then fetch the object with `<Model>.objects.get(id=pk)` and then delete it with `<obj>.delete()`.
+- redirect the user after operation
+
 <a id="credits"></a>
 # Credits
 [back to top](#table-of-contents)

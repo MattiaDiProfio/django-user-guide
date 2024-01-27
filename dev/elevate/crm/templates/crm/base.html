@@ -1,5 +1,17 @@
-<html>
+<html>  
     <h1>Website Under Development</h1>
+    <hr>
+
+    <!-- uses the name parameter in the urlspatterns to link urls to html in templates-->
+    <!-- define a navbar -->
+
+    <a href="{% url '' %}">Home</a>
+    &nbsp;
+    <a href="{% url 'create-task' %}">Create task</a>
+    &nbsp;
+    <a href="{% url 'all-tasks' %}">All tasks</a>
+    &nbsp;
+    <a href="{% url 'register' %}">Register</a>
     <hr>
 
     {% block content %}

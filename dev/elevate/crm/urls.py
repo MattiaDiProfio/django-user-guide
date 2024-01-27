@@ -8,7 +8,7 @@ urlpatterns = [
     path('register', views.register, name="register"), 
 
     # define response path for the 'task' route 
-    path('task', views.task, name="task"), 
+    path('all-tasks', views.all_tasks, name="all-tasks"), 
 
     # define response path for the 'task' model form
     path('create-task', views.create_task, name="create-task"),

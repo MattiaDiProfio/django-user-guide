@@ -5,27 +5,5 @@
         <h1>Home Page</h1>
         <p>welcome to my website</p>
 
-        <h3>My name is {{ name }} and i am {{ age }} years old</h3>
-
-        <!-- example of conditional rendering -->
-        {% if age >= 18 %}
-            <p>{{ name }} can drink beer</p>
-        {% else %}
-            <p>{{ name }} cannot drink beer</p>
-        {% endif %}
-
-        <!-- example of looping over data in a template -->
-        <h3>{{ name }}'s numbers are : </h3>
-        {% for n in numbers %}
-            <p>{{ n }}</p>
-        {% endfor %}
-
-        <!-- uses the name parameter in the urlspatterns to link urls to html in templates-->
-        <a href="{% url 'create-task' %}">Create task</a>
-
-        <br>
-
-
-
     {% endblock %}
 </html>

@@ -5,23 +5,15 @@ from .forms import TaskForm
 
 def home(request):
 
-    # context dictionary to be passed to the index.html template
-    context = {
-        'name' : 'Mattia', 
-        'age' : 21, 
-        'numbers' : [1,3,6,2,7]
-    }
+    return render(request, 'crm/index.html')
 
-    # pass context via the render function
-    return render(request, 'crm/index.html', context)
-
-def task(request):
+def all_tasks(request):
 
     # perform a DB query 
     query_data_all = Task.objects.all()
     context = { 'allTasks' : query_data_all }
 
-    return render(request, 'crm/task.html', context)
+    return render(request, 'crm/all-tasks.html', context)
 
 def register(request):
     return render(request, 'crm/register.html')
@@ -41,7 +33,7 @@ def create_task(request):
             form.save()
 
             # redirect user to the task input page - uses the 'name' attribute in the urlspattern route
-            return redirect('task')
+            return redirect('all-tasks')
 
     # create a context dictionary
     context = { 'form' : form }

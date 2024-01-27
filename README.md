@@ -196,6 +196,8 @@ Template inheritance can be setup with the following steps
 
 ## Integrating a Database
 
+[back to top](#table-of-contents)
+
 - Django apps come with a built-in SQLite relational database. Throughout this section, we will go through the steps to carry out CRUD operations on this database.
 
 <a id="django-admin-panel"></a>

@@ -23,6 +23,7 @@
   - [Perform database queries](#db-queries)
 - [Model forms and CRUD operations](#model-forms-crud)
   - [Create a model form](#create-model-form)
+  - [Add CRUD functionalities](#crud-operations)
 - [Credits](#credits)
 
 This document serves as a personal guide to help developers understand the basics of working with the Django framework.
@@ -272,6 +273,30 @@ Now we have a look at how we can link multiple models using the concept of forei
 - create a context dictionary `{ "form" : instance_created }` and return `render(...)` as done with other views.
 - Finally, go to the last .html file you created and populate it to display the form model you passed in as a context dictionary. Here is an example below :
 `<form method="POST" autocomplete="off" enctype="multipart/form-data" {% csrf_token %} {{ form.as_p }} <input type="submit" value="Submit"> </form>` - as_p helps with formatting and labels of attribute names
+
+<a id="crud-operations"></a>
+
+### Adding CRUD operations
+
+1. **C - CREATE**
+
+- To create a new model instance, follow the steps outlined below.
+
+1. Go to the *views.py* file, and define a view/function named `def create_<model_instance>(request): pass` if not there already
+2. Import the `redirect` method from the `django.shortcuts` package
+3. Inside the method defined in step 1 :
+  
+- Check what the form action is with `if request.method == "POST"`
+- If that's the case, reassign the form with `form = TaskForm(request.POST)`
+- Then we check if the form data is valid with `if form.is_valid():`
+- If the data is valid we save the object and redirect the user to the input page which triggered the CREATE action - `form.save() return redirect('task')`
+- if the request method is not POST, simply `return render(...)`
+
+2. **R - READ**
+
+3. **U - UPDATE**
+
+4. **D - DELETE**
 
 <a id="credits"></a>
 # Credits

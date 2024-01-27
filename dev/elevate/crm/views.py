@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Task
 from .forms import TaskForm
@@ -19,9 +19,7 @@ def task(request):
 
     # perform a DB query 
     query_data_all = Task.objects.all()
-    context = {
-        'allTasks' : query_data_all
-    }
+    context = { 'allTasks' : query_data_all }
 
     return render(request, 'crm/task.html', context)
 
@@ -29,11 +27,23 @@ def register(request):
     return render(request, 'crm/register.html')
 
 
-def task_form(request):
+def create_task(request):
     
     form = TaskForm()
+
+    # check the request method
+    if request.method == "POST":
+
+        form = TaskForm(request.POST)
+        # check if form data is valid
+        if form.is_valid():
+            # send data to database
+            form.save()
+
+            # redirect user to the task input page - uses the 'name' attribute in the urlspattern route
+            return redirect('task')
 
     # create a context dictionary
     context = { 'form' : form }
 
-    return render(request, 'crm/task-form.html', context)
+    return render(request, 'crm/create-task.html', context)

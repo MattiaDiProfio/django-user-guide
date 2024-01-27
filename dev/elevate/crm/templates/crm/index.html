@@ -21,8 +21,11 @@
         {% endfor %}
 
         <!-- uses the name parameter in the urlspatterns to link urls to html in templates-->
-        <a href="{% url '' %}">Go to my model form</a>
-        <a href="{% url 'task-form' %}">Go to my task form</a>
+        <a href="{% url 'create-task' %}">Create task</a>
+
+        <br>
+
+
 
     {% endblock %}
 </html>

@@ -5,6 +5,12 @@
         <h1>Home Page</h1>
         <p>welcome to my website</p>
 
+        <br>
+
+        <a href="{% url 'create-task' %}">Create task</a>
+
+        <br>
+
         <h3>My Tasks</h3>
 
         {% for task in allTasks %}
@@ -17,6 +23,7 @@
             <br>
 
         {% endfor %}
+
 
     {% endblock %}
 </html>

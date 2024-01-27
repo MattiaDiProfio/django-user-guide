@@ -11,5 +11,5 @@ urlpatterns = [
     path('task', views.task, name="task"), 
 
     # define response path for the 'task' model form
-    path('task-form', views.task_form, name="task-form"),
+    path('create-task', views.create_task, name="create-task"),
 ]

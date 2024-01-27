@@ -413,6 +413,14 @@ def login(request):
 7. Finally, we populate the *login.html* file with `{{ LoginForm.as_p }}` and add a login url in the *base.html* file.
 8. Modify the register view so that the user is redirected to the login url when they register a new account
 
+Now we look at how to setup user logout and protecting the Views on our app with authorization.
+
+1. create a logout view in *views.py* and configure it in *urls.py*
+2. Inside this view, logout the user with `auth.logout(request)` and redirect them where best suited.
+3. Add a logout link in *dashboard.html*
+
+- We can protect views in our app by importing `from django.contrib.auth.decorators import login_required` - a decorator function which takes in a redirec parameter in cas of failed auth. For example `@login_required(login_url='login')`
+
 # Credits
 
 [back to top](#table-of-contents)

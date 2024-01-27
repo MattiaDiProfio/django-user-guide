@@ -6,6 +6,8 @@ from .forms import TaskForm, CreateUserForm, LoginForm
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate, login, logout
 
+from django.contrib.auth.decorators import login_required
+
 def home(request):
 
     return render(request, 'crm/index.html')
@@ -109,6 +111,14 @@ def login(request):
     context = { 'LoginForm' : form }
     return render(request, 'crm/login.html', context)
 
+@login_required(login_url='login')
 def dashboard(request):
 
     return render(request, 'crm/dashboard.html')
+
+def logout(request):
+    
+    # expires user session currently login into dashboard
+    auth.logout(request)
+
+    return redirect("")

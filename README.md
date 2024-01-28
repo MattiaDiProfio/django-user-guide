@@ -30,7 +30,7 @@
   - [Configure user auth](#user-authentication)
 - [Credits](#credits)
 
-This document serves as a personal guide to help developers understand the basics of working with the Django framework.
+This document serves as a personal guide to assist Team Alpha while working with the Django framework.
 Throughout this guide, I have documented the steps necessary to setup, run and customize a Django application, and for each step I have included a short explaination to give you more context on how the process works.
 
 <a id="django-projects"></a>
